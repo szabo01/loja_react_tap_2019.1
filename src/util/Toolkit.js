@@ -20,7 +20,11 @@ export default class Toolkit {
     */
     static formataNumero(numero, n, x, s, c) {
       let re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')';
-      let num = numero.toFixed(Math.max(0, ~~n));
+      let num = numero;
+      
+      try {
+        num = numero.toFixed(Math.max(0, ~~n));
+      } catch (err) {}
   
       return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
     };

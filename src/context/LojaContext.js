@@ -16,12 +16,18 @@ export class LojaProvider extends Component {
     produtos: BancoDeDados.getProdutos(),
     carrinho: [],
     carrinhoVisivel: false
-  };  
+  };
+
+  setProdutos = (produtos) => {
+    //this.setState({produtos});
+    console.log('produtos', produtos);
+  };
 
   render() {
     return (
       <LojaContext.Provider value={{
           state: this.state,
+          setProdutos: this.setProdutos,
           buscar: (termo) => {
             let produtos = BancoDeDados.getProdutos().filter((p) => {
               return p.nome.toLowerCase().includes(termo.toLowerCase());

@@ -1,3 +1,4 @@
+// TODO: adicionar as imagens no banco de dados
 const PRODUTOS = [
     {nome: 'Notebook', preco: 2500, imagem: "https://images-americanas.b2w.io/produtos/01/00/item/133775/9/133775934_1GG.jpg"},
     {nome: 'Fritadeira', preco: 240, imagem: "https://images-americanas.b2w.io/produtos/01/00/offers/01/00/item/127878/8/127878831_1GG.png"},
@@ -12,6 +13,17 @@ const PRODUTOS = [
 class BancoDeDados {
     static getProdutos() {
         return PRODUTOS;
+    }
+
+    static getProdutosBackend = async () => {
+        const response = await fetch('http://localhost:9000/produtos');
+        const produtos = await response.json(); // TODO: fazer map convertendo o valor para numero
+
+        if (response.status !== 200) {
+            throw new Error(produtos.message);
+        }
+
+        return produtos;
     }
 }
 

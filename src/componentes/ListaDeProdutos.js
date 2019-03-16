@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import {LojaContext} from '../context/LojaContext';
 import ItemProduto from './ItemProduto';
 import Toolkit from '../util/Toolkit';
@@ -7,24 +7,22 @@ import Row from 'react-bootstrap/Row';
 
 const PRODUTOS_POR_LINHA = 4;
 
-class ListaDeProdutos extends Component {
-  renderProduto = (linha) => {
+function ListaDeProdutos() {
+  let { state } = useContext(LojaContext);
+
+  let renderProduto = (linha, i) => {
     return (
-      <Row>
-        {linha.map((p) => (<ItemProduto produto={p} />))}
+      <Row key={i}>
+        {linha.map((p, j) => (<ItemProduto produto={p} key={j}/>))}
       </Row>
     );
   }
   
-  render() {
-    return (
-      <Container>
-        {Toolkit.splitArray(this.context.state.produtos, PRODUTOS_POR_LINHA).map(this.renderProduto)}
-      </Container>
-    );
-  }
+  return (
+    <Container>
+      {Toolkit.splitArray(state.produtos, PRODUTOS_POR_LINHA).map(renderProduto)}
+    </Container>
+  );
 }
-
-ListaDeProdutos.contextType = LojaContext;
 
 export default ListaDeProdutos;
