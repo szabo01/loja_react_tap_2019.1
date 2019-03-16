@@ -6,11 +6,11 @@ import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 
 function CarrinhoDeCompras() {
-  let { state, esconderCarrinho } = useContext(LojaContext);
+  let { state, setCarrinhoVisivel } = useContext(LojaContext);
   let renderProduto = (p, i) => (<ItemCarrinho produto={p} index={i} key={i} />);
 
   return (
-    <Modal show={state.carrinhoVisivel} centered onHide={esconderCarrinho}>
+    <Modal show={state.carrinhoVisivel} centered onHide={() => setCarrinhoVisivel(false)}>
       <Modal.Header closeButton>
         <Modal.Title>Carrinho de Compras</Modal.Title>
       </Modal.Header>

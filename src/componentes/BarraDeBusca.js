@@ -8,7 +8,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Badge from 'react-bootstrap/Badge';
 
 function BarraDeBusca() {
-  let { state, buscar, mostrarCarrinho } = useContext(LojaContext);
+  let { state, buscar, setCarrinhoVisivel } = useContext(LojaContext);
 
   return (
     <Navbar bg="light" fixed="top">
@@ -22,7 +22,7 @@ function BarraDeBusca() {
                 onChange={(event) => buscar(event.target.value)} />
             </Form>
             { (state.carrinho.length <= 0) ? '' : (
-              <Button variant="primary" onClick={mostrarCarrinho}>
+              <Button variant="primary" onClick={() => setCarrinhoVisivel(true)}>
                 🛒 <Badge variant="light">{state.carrinho.length}</Badge>
               </Button>
             ) }

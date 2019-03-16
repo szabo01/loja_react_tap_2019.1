@@ -6,13 +6,14 @@ import CarrinhoDeCompras from "./CarrinhoDeCompras";
 import BancoDeDados from "../bd/BancoDeDados";
 
 function Loja() {
-  let { setProdutos } = useContext(LojaContext);
+  let { setProdutosBackend } = useContext(LojaContext);
 
   useEffect(() => {
-    BancoDeDados.getProdutosBackend()
-      .then(produtos => setProdutos(produtos))
+    BancoDeDados.getProdutos()
+      .then(produtos => setProdutosBackend(produtos))
       .catch(err => console.log(err));
-  });
+  }, []); 
+  // Esse array, chamado de dependências, vai fazer o useEffect ser chamado uma única vez
 
   return (
     <>
