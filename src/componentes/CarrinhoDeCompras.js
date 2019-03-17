@@ -7,7 +7,36 @@ import Table from 'react-bootstrap/Table';
 
 function CarrinhoDeCompras() {
   let { state, setCarrinhoVisivel } = useContext(LojaContext);
-  let renderProduto = (p, i) => (<ItemCarrinho produto={p} index={i} key={i} />);
+
+  const renderProduto = (p, i) => (<ItemCarrinho produto={p} index={i} key={i} />);
+
+  const renderCabecalho = () => {
+    return (
+      <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>Produto</th>
+          <th>Valor</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+    );
+  };
+
+  const renderRodape = () => {
+    let total = state.carrinho.reduce((acc, p) => acc + p.preco, 0);
+  
+    return (
+      <tfoot>
+        <tr>
+          <th>&nbsp;</th>
+          <th>Total</th>
+          <th><FormataMoeda valor={total}/></th>
+          <th>&nbsp;</th>
+        </tr>
+      </tfoot>
+    );
+  };
 
   return (
     <Modal show={state.carrinhoVisivel} centered onHide={() => setCarrinhoVisivel(false)}>
@@ -16,43 +45,14 @@ function CarrinhoDeCompras() {
       </Modal.Header>
       <Modal.Body>
         <Table striped bordered hover>
-          <Cabecalho/>
+          {renderCabecalho()}
           <tbody>
             {state.carrinho.map(renderProduto)}
           </tbody>
-          <Rodape carrinho={state.carrinho} />
+          {renderRodape()}
         </Table>
       </Modal.Body>
     </Modal>
-  );
-}
-
-// Criando alguns hooks para simplificar o código principal
-function Cabecalho() {
-  return (
-    <thead>
-      <tr>
-        <th>&nbsp;</th>
-        <th>Produto</th>
-        <th>Valor</th>
-        <th>Ação</th>
-      </tr>
-    </thead>
-  );
-}
-
-function Rodape(props) {
-  let total = props.carrinho.reduce((acc, p) => acc + p.preco, 0);
-
-  return (
-    <tfoot>
-      <tr>
-        <th>&nbsp;</th>
-        <th>Total</th>
-        <th><FormataMoeda valor={total}/></th>
-        <th>&nbsp;</th>
-      </tr>
-    </tfoot>
   );
 }
 

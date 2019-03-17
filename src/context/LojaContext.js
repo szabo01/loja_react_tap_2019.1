@@ -8,20 +8,18 @@ export function LojaProvider(props) {
   const [carrinho, setCarrinho] = useState([]);
   const [carrinhoVisivel, setCarrinhoVisivel] = useState(false);
 
-  let buscar = (termo) => {
+  const buscar = (termo) => {
     setProdutos(produtosBackend.filter((p) => {
       return p.nome.toLowerCase().includes(termo.toLowerCase());
     }));
   };
 
-  let comprar = (produto) => {
+  const comprar = (produto) => {
     setCarrinho([...carrinho, produto]);
   };
 
-  let remover = (indice) => { // TODO - há um bug aqui, corrigir !
-    let carrinho = [...carrinho];
-    carrinho.splice(indice, 1);
-    setCarrinho({carrinho});
+  const remover = (indice) => {
+    setCarrinho([...carrinho.slice(0, indice), ...carrinho.slice(indice + 1)]);
   };
 
   return (

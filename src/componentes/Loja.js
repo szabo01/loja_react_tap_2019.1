@@ -13,7 +13,6 @@ function Loja() {
       .then(produtos => setProdutosBackend(produtos))
       .catch(err => console.log(err));
   }, []); 
-  // Esse array, chamado de dependências, vai fazer o useEffect ser chamado uma única vez
 
   return (
     <>
