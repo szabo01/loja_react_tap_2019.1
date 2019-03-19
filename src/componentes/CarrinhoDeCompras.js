@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 
 function CarrinhoDeCompras() {
-  let { state, setCarrinhoVisivel } = useContext(LojaContext);
+  let { state: {carrinho, carrinhoVisivel}, setCarrinhoVisivel } = useContext(LojaContext);
 
   const renderProduto = (p, i) => (<ItemCarrinho produto={p} index={i} key={i} />);
 
@@ -24,7 +24,7 @@ function CarrinhoDeCompras() {
   };
 
   const renderRodape = () => {
-    let total = state.carrinho.reduce((acc, p) => acc + p.preco, 0);
+    let total = carrinho.reduce((acc, p) => acc + p.preco, 0);
   
     return (
       <tfoot>
@@ -39,7 +39,7 @@ function CarrinhoDeCompras() {
   };
 
   return (
-    <Modal show={state.carrinhoVisivel} centered onHide={() => setCarrinhoVisivel(false)}>
+    <Modal show={carrinhoVisivel} centered onHide={() => setCarrinhoVisivel(false)}>
       <Modal.Header closeButton>
         <Modal.Title>Carrinho de Compras</Modal.Title>
       </Modal.Header>
@@ -47,7 +47,7 @@ function CarrinhoDeCompras() {
         <Table striped bordered hover>
           {renderCabecalho()}
           <tbody>
-            {state.carrinho.map(renderProduto)}
+            {carrinho.map(renderProduto)}
           </tbody>
           {renderRodape()}
         </Table>

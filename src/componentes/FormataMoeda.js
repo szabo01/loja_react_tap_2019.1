@@ -1,10 +1,7 @@
-import { Component } from 'react';
 import Toolkit from '../util/Toolkit';
 
-class FormataMoeda extends Component {
-    render() {
-        return 'R$ ' + Toolkit.formataNumero(this.props.valor, 2, 3, '.', ',');
-    }
+function FormataMoeda(props) {
+    return 'R$ ' + Toolkit.formataNumero({numero: props.valor});
 }
 
 export default FormataMoeda;

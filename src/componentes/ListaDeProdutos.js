@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 const PRODUTOS_POR_LINHA = 4;
 
 function ListaDeProdutos() {
-  let { state } = useContext(LojaContext);
+  let { state: {produtos} } = useContext(LojaContext);
 
   let renderProduto = (linha, i) => {
     return (
@@ -20,7 +20,7 @@ function ListaDeProdutos() {
   
   return (
     <Container>
-      {Toolkit.splitArray(state.produtos, PRODUTOS_POR_LINHA).map(renderProduto)}
+      {Toolkit.splitArray(produtos, PRODUTOS_POR_LINHA).map(renderProduto)}
     </Container>
   );
 }
