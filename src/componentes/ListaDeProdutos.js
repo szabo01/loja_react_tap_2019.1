@@ -7,22 +7,24 @@ import Row from 'react-bootstrap/Row';
 
 const PRODUTOS_POR_LINHA = 4;
 
-function ListaDeProdutos() {
-  let { state: {produtos} } = useContext(LojaContext);
-
-  let renderProduto = (linha, i) => {
+class ListaDeProdutos extends Component {
+  renderProduto = (linha) => {
     return (
-      <Row key={i}>
-        {linha.map((p, j) => (<ItemProduto produto={p} key={j}/>))}
+      <Row>
+        {linha.map((p) => (<ItemProduto produto={p} />))}
       </Row>
     );
   }
   
-  return (
-    <Container>
-      {Toolkit.splitArray(produtos, PRODUTOS_POR_LINHA).map(renderProduto)}
-    </Container>
-  );
+  render() {
+    return (
+      <Container>
+        {Toolkit.splitArray(this.context.state.produtos, PRODUTOS_POR_LINHA).map(this.renderProduto)}
+      </Container>
+    );
+  }
 }
+
+ListaDeProdutos.contextType = LojaContext;
 
 export default ListaDeProdutos;
