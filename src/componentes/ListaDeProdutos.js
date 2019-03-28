@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { Component } from 'react';
 import {LojaContext} from '../context/LojaContext';
 import ItemProduto from './ItemProduto';
 import Toolkit from '../util/Toolkit';

@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { LojaProvider } from '../context/LojaContext';
-import { LojaContext } from "../context/LojaContext";
 import BarraDeBusca from "./BarraDeBusca";
-import ListaDeProdutos from "./ListaDeProdutos";
 import CarrinhoDeCompras from "./CarrinhoDeCompras";
-import BancoDeDados from "../bd/BancoDeDados";
+import ListaDeProdutos from "./ListaDeProdutos";
+import PaginaNaoEncontrada from './PaginaNaoEncontrada';
 import InfoProduto from './InfoProduto';
-
 import { BrowserRouter, Switch, Route} from '../../react-router-dom';
 
 
@@ -17,7 +15,9 @@ class Loja extends Component {
         <BarraDeBusca/>
         <BrowserRouter>
           <Switch>
-            <Route path="/" exact component={ListaDeProdutos} />
+            <Route path="/" exact component={Home} />
+            <Route path="/registro" exact component={Registro} />
+            <Route path="/login" exact component={Login} />
             <Route path="/produtos" exact component={ListaDeProdutos} />
             <Route path="/produtos/:id" component={InfoProduto} />
             <Route component={PaginaNaoEncontrada} />
