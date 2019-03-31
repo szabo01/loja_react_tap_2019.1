@@ -9,7 +9,11 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 
 class InfoProduto extends Component {
-render(){
+  state = {
+    produto: BancoDeDados.getProdutos().find(item => item.id === parseInt(this.props.location.pathname.split('/')[2]))
+  }
+
+  render(){
 
   return (
     <Container>
